@@ -152,52 +152,55 @@
         </style>
     </head>
     <body>
-        <div class="page-container">
-            <header class="header">
-                <h1>Контакты</h1>
-            </header>
+        
+            <h1 class = "header__title">Контакты</h1>
+        </header>
+        
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item nav_item--active">
+                    <a class="nav__link" href="../indexv1.html">Главная</a>
+                </li>
+                <li class="nav__item"> 
+                    <a class = "nav__link" href="pages/news.html">Новости</a>
+                </li>
+                <li class="nav__item">
+                    <a class = "nav__link" href="pages/contacts.html">Контакты</a>
+                </li>
+            </ul>
+        </nav>
 
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
-                    <li class="nav-item"><a class="nav-link" href="news.html">Новости</a></li>
-                    <li class="nav-item"><a class="nav-link" href="practices.html">Практики</a></li> 
-                    <li class="nav-item"><a class="nav-link" href="goods.html">Товары</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
-                </ul>
-            </nav>
-
-            <main class="content">
-                <section class="contacts-container">
-                    <h2 class="section-title">Наши контакты</h2>
+            <main class="contacts">
+                <section class="contacts__list">
+                    <h2 class="conctacts__title">Наши контакты</h2>
                     
-                    <article class="contact-info">
-                        <h3>Электронная почта</h3>
-                        <p>Адрес электронной почты: nya@gmail.com</p>
+                    <article class="contacts">
+                        <h3 class = "contacts__list">Электронная почта</h3>
+                        <p class = "contact-item__value"> Адрес электронной почты: nya@gmail.com</p>
                     </article>
                     
-                    <article class="contact-info">
-                        <h3>Физический адрес</h3>
-                        <p>Адрес: г. Москва, ул. Baker, 221b</p>
+                    <article class="contacts">
+                        <h3 class = "contacts__list">Физический адрес</h3>
+                        <p class = "contact-item__value"> Адрес: г. Москва, ул. Baker, 221b</p>
                     </article>
 
-                    <div class="contact-grid">
-                        <div class="contact-item">
-                            <h3>Телефон</h3>
-                            <p>+7 (800) 555-35-35</p>
+                        <div class="contacts">
+                            <h3 class = "contacts__list">Телефон</h3>
+                            <p class = "contact-item__value">+7 (800) 555-35-35</p>
                         </div>
-                        <div class="contact-item">
-                            <h3>Время работы</h3>
-                            <p>Пн-Пт: 9:00-18:00</p>
+                        <div class="contacts">
+                            <h3 class = "contacts__list">Время работы</h3>
+                            <p class = "contact-item__value">Пн-Пт: 9:00-18:00</p>
                         </div>
-                        <div class="contact-item">
-                            <h3>Социальные сети</h3>
-                            <p>VK, Telegram, WhatsApp, СКАМ</p>
+                        <div class="contacts">
+                            <h3 class = "contacts__list">Социальные сети</h3>
+                            <p class = "contact-item__value">VK, Telegram, WhatsApp, СКАМ</p>
                         </div>
-                    </div>
+                </section>
+            </main>
                     
                     <!-- Измененная кнопка для открытия модального окна -->
-                    <button class="contact-button" onclick="contactModal.showModal()">Связаться с нами</button>
+                    <button class="skill--css" onclick="contactModal.showModal()">Связаться с нами</button>
                 </section>
             </main>
 

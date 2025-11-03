@@ -5,143 +5,504 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - StudentDev Portfolio</title>
-    <link rel="stylesheet" href="/style/styles.css">
+    <style>
+        /* Базовые стили для страницы */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .main {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        /* Стили навигации */
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            padding: 20px;
+            margin: 0;
+            background: #f8f9fa;
+        }
+
+        .nav-link {
+            padding: 10px 15px;
+            background: #f0f0f0;
+            text-decoration: none;
+            color: #333;
+            border: 2px solid transparent;
+            display: block;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* Критически важные стили для доступности */
+        .nav-link:focus {
+            outline: none;
+            border-color: #0066cc;
+            background: #e6f3ff;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.3);
+        }
+
+        .nav-link:hover {
+            background: #ddefff;
+        }
+
+        /* Индикатор текущей страницы */
+        .nav-link[aria-current="page"] {
+            background: #0066cc;
+            color: white;
+        }
+
+        /* Стили формы */
+        .contacts__content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .contacts__content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form__group {
+            margin-bottom: 20px;
+        }
+
+        .form__label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .form__input,
+        .form__textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .form__textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Стили для ошибок */
+        .form__input--error,
+        .form__textarea--error {
+            border-color: #e74c3c;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Стили кнопки отправки */
+        .submit-btn {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+            min-width: 200px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .submit-btn:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: #0055aa;
+        }
+
+        .submit-icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        /* Стили контактной информации */
+        .contact-info__title {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .contact-info__items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-item__icon {
+            font-size: 24px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-item__title {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-item__value {
+            margin: 0;
+            color: #666;
+        }
+
+        /* Стили футера */
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer__content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer__links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer__link {
+            color: #0066cc;
+            text-decoration: none;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        .footer__link:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.3);
+        }
+
+        .footer__link:hover {
+            text-decoration: underline;
+        }
+
+        /* Скрываем текст визуально, но оставляем для скринридеров */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Стили для fieldset */
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 10px;
+        }
+
+        /* Стили для сообщения об успешной отправке */
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="page">
-        <!-- Header -->
-        <header class="header">
-            <div class="container">
-                <div class="header__content">
-                    <h1 class="header__title">Туранов Илья</h1>
-                    <p class="header__subtitle">Студент-разработчик</p>
-                </div>
-            </div>
-        </header>
-        
-        <!-- Navigation -->
-        <nav class="nav">
-            <div class="container">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="/index.html" class="nav__link">Главная</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="practices.html" class="nav__link">Проекты</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="diary.html" class="nav__link">Дневник</a>
-                    </li>
-                    <li class="nav__item nav__item--active">
-                        <a href="contacts.html" class="nav__link">Контакты</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <!-- Навигация -->
+    <nav aria-label="Основная навигация">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="#home" class="nav-link">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a href="#projects" class="nav-link">Проекты</a>
+            </li>
+            <li class="nav-item">
+                <a href="#diary" class="nav-link">Дневник</a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact" class="nav-link" aria-current="page">Контакты</a>
+            </li>
+        </ul>
+    </nav>
 
-        <!-- Main Content -->
-        <main class="main">
-            <div class="container">
-                <h3 class="section-title">Свяжитесь со мной</h3>
-                
-                <div class="contacts__content">
-                    <!-- Contact Form -->
-                    <section class="contact-form">
-                        <form class="form">
+    <!-- Основной контент -->
+    <main class="main">
+        <div class="container">
+            <h1 class="section-title">Свяжитесь со мной</h1>
+
+            <div class="contacts__content">
+                <!-- Форма обратной связи -->
+                <section class="contact-form" aria-labelledby="contact-form-title">
+                    <h2 id="contact-form-title" class="sr-only">Форма обратной связи</h2>
+
+                    <!-- Область для сообщений об успешной отправке -->
+                    <div id="success-message" class="success-message" aria-live="polite" role="alert"
+                        style="display: none;"></div>
+
+                    <form class="form" id="contact-form" novalidate>
+                        <!-- Группа полей для личной информации -->
+                        <fieldset>
+                            <legend>Личная информация</legend>
+
                             <div class="form__group">
                                 <label class="form__label" for="name">
-                                    Имя <span class="required">*</span>
+                                    Имя <span class="required" aria-hidden="true">*</span>
+                                    <span class="sr-only">обязательное поле</span>
                                 </label>
-                                <input type="text" id="name" name="name" class="form__input" required placeholder="Введите ваше имя">
+                                <input type="text" id="name" name="name" class="form__input" required
+                                    placeholder="Введите ваше имя" aria-required="true">
+                                <span id="name-error" class="error-message" aria-live="polite"></span>
                             </div>
-                            
+
                             <div class="form__group">
                                 <label class="form__label" for="email">
-                                    Электронная почта <span class="required">*</span>
+                                    Электронная почта <span class="required" aria-hidden="true">*</span>
+                                    <span class="sr-only">обязательное поле</span>
                                 </label>
-                                <input type="email" id="email" name="email" class="form__input" required placeholder="example@mail.ru">
+                                <input type="email" id="email" name="email" class="form__input" required
+                                    placeholder="example@mail.ru" aria-required="true">
+                                <span id="email-error" class="error-message" aria-live="polite"></span>
                             </div>
-                            
+                        </fieldset>
+
+                        <!-- Группа полей для сообщения -->
+                        <fieldset>
+                            <legend>Ваше сообщение</legend>
+
                             <div class="form__group">
                                 <label class="form__label" for="message">
-                                    Текст обращения <span class="required">*</span>
+                                    Текст обращения <span class="required" aria-hidden="true">*</span>
+                                    <span class="sr-only">обязательное поле</span>
                                 </label>
-                                <textarea id="message" name="message" class="form__textarea" required placeholder="Опишите вашу проблему или вопрос..."></textarea>
+                                <textarea id="message" name="message" class="form__textarea" required
+                                    placeholder="Опишите вашу проблему или вопрос..." aria-required="true"></textarea>
+                                <span id="message-error" class="error-message" aria-live="polite"></span>
                             </div>
-                            
-                            <button type="button" class="button button--primary form__button" onclick="submitForm()">
-                                Отправить
-                            </button>
-                        </form>
-                    </section>
+                        </fieldset>
 
-                    <!-- Contact Info -->
-                    <section class="contact-info">
-                        <h4 class="contact-info__title">Контакты</h4>
-                        <div class="contact-info__items">
-                            <div class="contact-item">
-                                <div class="contact-item__icon">📧</div>
-                                <div class="contact-item__content">
-                                    <h5 class="contact-item__title">Email</h5>
-                                    <p class="contact-item__value">nya@gmail.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-item__icon">📱</div>
-                                <div class="contact-item__content">
-                                    <h5 class="contact-item__title">GitHub</h5>
-                                    <p class="contact-item__value">im2high</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-item__icon">📍</div>
-                                <div class="contact-item__content">
-                                    <h5 class="contact-item__title">Местоположение</h5>
-                                    <p class="contact-item__value">Москва, Россия</p>
-                                </div>
+                        <button type="submit" class="submit-btn">
+                            <span class="submit-icon" aria-hidden="true">✉️</span>
+                            Отправить сообщение
+                        </button>
+                    </form>
+                </section>
+
+                <!-- Контактная информация -->
+                <section class="contact-info" aria-labelledby="contact-info-title">
+                    <h2 id="contact-info-title" class="contact-info__title">Контакты</h2>
+                    <div class="contact-info__items">
+                        <div class="contact-item">
+                            <div class="contact-item__icon" aria-hidden="true">📧</div>
+                            <div class="contact-item__content">
+                                <h3 class="contact-item__title">Email</h3>
+                                <p class="contact-item__value">nya@gmail.com</p>
                             </div>
                         </div>
-                    </section>
-                </div>
-            </div>
-        </main>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer__content">
-                    <p class="footer__copyright">&copy; 2025 StudentDev Portfolio</p>
-                    <div class="footer__links">
-                        <a href="mailto:student@edu.ru" class="footer__link">student@edu.ru</a>
-                        <a href="https://github.com" class="footer__link">GitHub</a>
+                        <div class="contact-item">
+                            <div class="contact-item__icon" aria-hidden="true">📱</div>
+                            <div class="contact-item__content">
+                                <h3 class="contact-item__title">GitHub</h3>
+                                <p class="contact-item__value">im2high</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item__icon" aria-hidden="true">📍</div>
+                            <div class="contact-item__content">
+                                <h3 class="contact-item__title">Местоположение</h3>
+                                <p class="contact-item__value">Москва, Россия</p>
+                            </div>
+                        </div>
                     </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <p class="footer__copyright">&copy; 2025 StudentDev Portfolio</p>
+                <div class="footer__links">
+                    <a href="mailto:student@edu.ru" class="footer__link">student@edu.ru</a>
+                    <a href="https://github.com/" class="footer__link">GitHub</a>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
 
     <script>
-        function submitForm() {
-            // Базовая валидация формы
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (!name || !email || !message) {
-                alert('Пожалуйста, заполните все обязательные поля');
-                return;
+        // Обработка отправки формы
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Сброс предыдущих ошибок
+            resetErrors();
+
+            // Получение значений полей
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            let isValid = true;
+
+            // Валидация имени
+            if (!name) {
+                showError('name', 'Пожалуйста, введите ваше имя');
+                isValid = false;
             }
-            
-            alert('Сообщение отправлено! Спасибо за обращение.');
-            
-            // Очистка формы
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('message').value = '';
+
+            // Валидация email
+            if (!email) {
+                showError('email', 'Пожалуйста, введите адрес электронной почты');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError('email', 'Пожалуйста, введите корректный адрес электронной почты');
+                isValid = false;
+            }
+
+            // Валидация сообщения
+            if (!message) {
+                showError('message', 'Пожалуйста, введите текст обращения');
+                isValid = false;
+            }
+
+            // Если форма валидна, отправляем
+            if (isValid) {
+                // В реальном приложении здесь был бы AJAX-запрос
+                showSuccessMessage('Сообщение отправлено! Спасибо за обращение.');
+
+                // Очистка формы
+                document.getElementById('contact-form').reset();
+            }
+        });
+
+        // Функция для проверки email
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
         }
+
+        // Функция для отображения ошибок
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(`${fieldId}-error`);
+
+            // Добавляем класс ошибки к полю
+            field.classList.add('form__input--error');
+
+            // Устанавливаем атрибуты доступности
+            field.setAttribute('aria-invalid', 'true');
+            field.setAttribute('aria-describedby', `${fieldId}-error`);
+
+            // Устанавливаем текст ошибки
+            errorElement.textContent = message;
+
+            // Фокусируемся на первом поле с ошибкой
+            if (!document.querySelector('.form__input--error:focus')) {
+                field.focus();
+            }
+        }
+
+        // Функция для сброса ошибок
+        function resetErrors() {
+            const errorFields = document.querySelectorAll('.form__input, .form__textarea');
+            const errorMessages = document.querySelectorAll('.error-message');
+
+            errorFields.forEach(field => {
+                field.classList.remove('form__input--error');
+                field.removeAttribute('aria-invalid');
+                field.removeAttribute('aria-describedby');
+            });
+
+            errorMessages.forEach(message => {
+                message.textContent = '';
+            });
+
+            // Скрываем сообщение об успехе
+            document.getElementById('success-message').style.display = 'none';
+        }
+
+        // Функция для отображения сообщения об успехе
+        function showSuccessMessage(message) {
+            const successElement = document.getElementById('success-message');
+            successElement.textContent = message;
+            successElement.style.display = 'block';
+
+            // Фокусируемся на сообщении об успехе для скринридеров
+            successElement.focus();
+        }
+
+        // Обработка клавиатуры для навигации
+        document.addEventListener('keydown', function (e) {
+            // Обработка Escape для сброса фокуса (если нужно)
+            if (e.key === 'Escape') {
+                // В данном случае Escape не имеет специфического применения,
+                // но в реальном приложении мог бы закрывать модальные окна
+            }
+        });
     </script>
 </body>
 
